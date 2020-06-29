@@ -1,0 +1,7 @@
+<mdt-dynamic-table [columns]="columns"
+                   [dataSource]="dataSource"
+                   [pageSize]="pagination?.per_page"
+                   [paginator]="null"
+>
+</mdt-dynamic-table>
+<app-paginator [pagination]="pagination" (page)="fetchPage($event)"></app-paginator>

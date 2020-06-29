@@ -1,0 +1,7 @@
+<button mat-icon-button  color="accent"
+        aria-label="Example icon button with a bookmark icon"
+        [routerLink]="['/management','role','add']">
+    <mat-icon>menu</mat-icon>
+</button>
+<mdt-dynamic-table [paginator]="null" [columns]="columns" [dataSource]="dataSource"></mdt-dynamic-table>
+<app-paginator [pagination]="pagination"></app-paginator>

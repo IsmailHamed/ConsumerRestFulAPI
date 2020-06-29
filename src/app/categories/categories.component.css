@@ -1,0 +1,36 @@
+.example-card {
+    max-width: 360px;
+
+}
+
+.example-header-image {
+    background-image: url('https://material.angular.io/assets/img/examples/shiba1.jpg');
+    background-size: cover;
+}
+.mat-card{
+    display:flex;/** <-- Add this **/
+    flex-direction: column;/** <-- Add this **/
+}
+
+/** Add flex-shrink to be 0 so the header should not be clipped or shrink if the parent card height changes **/
+.mat-card-header {
+    display: flex;
+    flex-direction: row;
+    flex-shrink: 0; /** <-- Add this **/
+}
+
+/** Make the card content to be flex grow factor of 1, this is going to scale to your inline height or custom height.  Content should scroll within the card height and not expand the card's height.  **/
+.mat-card-content{
+    flex-grow: 1;/** <-- Add this **/
+    overflow: auto; /** <-- Add this **/
+    /* outline: 1px solid red; */
+}
+/*mat-grid-tile {*/
+    /*background: lightblue;*/
+    /*!*margin: 10px;*!*/
+
+/*}*/
+mat-card {
+    width: calc(100% - 60px);
+    height: calc(100% - 60px);
+}

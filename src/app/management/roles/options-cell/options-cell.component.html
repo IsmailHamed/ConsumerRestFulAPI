@@ -1,0 +1,7 @@
+<button mat-icon-button color="primary" [matMenuTriggerFor]="appMenu">
+    <mat-icon>more_vert</mat-icon>
+</button>
+<mat-menu #appMenu="matMenu">
+    <button mat-menu-item (click)="fetchRole()">Edit</button>
+    <button mat-menu-item (click)="deleteRole()">Delete</button>
+</mat-menu>

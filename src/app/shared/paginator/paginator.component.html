@@ -1,0 +1,8 @@
+<mat-paginator
+        [length]="pagination?.total"
+        [pageSize]="pagination?.per_page"
+        [pageSizeOptions]="[5, 10,15, 20]"
+        [pageIndex]="pagination?.current_page-1"
+        [ngClass]="{'center': center}"
+        (page)="fetchPage($event)">
+</mat-paginator>

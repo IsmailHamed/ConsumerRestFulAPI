@@ -1,0 +1,83 @@
+<mat-toolbar style="background-color: #4caf50" color="primary">
+    <mat-toolbar-row>
+        <!--<button mat-icon-button>-->
+        <!--<mat-icon (click)="sidenav.toggle()">menu</mat-icon>-->
+        <!--</button>-->
+        <button mat-button>
+            <mat-icon aria-hidden="false" aria-label="Example home icon">home</mat-icon>
+            <!--<span class="menu-spacer">Home</span>-->
+        </button>
+
+        <div>
+            <button mat-button
+                    *ngIf="isAuthenticated"
+                    [matMenuTriggerFor]="menu">
+                Categories
+            </button>
+            <mat-menu #menu="matMenu">
+                <button mat-menu-item
+                        [routerLink]="'/categories'">
+                    Categories
+                </button>
+                <button mat-menu-item
+                        [routerLink]="['/category','add']">
+                    Add category
+                </button>
+            </mat-menu>
+            <a mat-button [routerLink]="'/products'" *ngIf="isAuthenticated"> Products</a>
+
+            <!--<a mat-button [routerLink]="'/categories'" *ngIf="isAuthenticated"> Categories</a>-->
+            <a mat-button [routerLink]=""> Contacts </a>
+            <a mat-button [routerLink]=""> Create Contact </a>
+            <a mat-button [routerLink]=""> Activities </a>
+            <a mat-button [routerLink]=""> Create Activity </a>
+        </div>
+        <!-- This fills the remaining space of the current row -->
+        <span class="remaining-space"></span>
+        <a mat-button [routerLink]="'/auth'" *ngIf="!isAuthenticated"> LogIn </a>
+
+        <button mat-button
+                [matMenuTriggerFor]="settings"
+                *ngIf="isAuthenticated">
+            <mat-icon aria-hidden="false">settings</mat-icon>
+            <!--<span class="menu-spacer">Home</span>-->
+        </button>
+        <mat-menu #settings="matMenu">
+            <button mat-menu-item
+                    [routerLink]="'/management'">
+                <mat-icon>account_circle</mat-icon>
+                Management
+            </button>
+            <button mat-menu-item
+                    [routerLink]="['/category','add']">
+                Add category
+            </button>
+        </mat-menu>
+        <button mat-button (click)="onLogout()" *ngIf="isAuthenticated">
+            <mat-icon>exit_to_app</mat-icon>
+            <!--<span class="menu-spacer">Home</span>-->
+        </button>
+
+    </mat-toolbar-row>
+</mat-toolbar>
+
+<!--<mat-sidenav-container>-->
+<!--<mat-sidenav #sidenav>-->
+<!--<mat-nav-list>-->
+<!--<a mat-list-item [routerLink]="'/accounts'"> Accounts </a>-->
+<!--<a mat-list-item [routerLink]="'/create-account'"> Create Account </a>-->
+<!--<a mat-list-item [routerLink]="'/contacts'"> Contacts </a>-->
+<!--<a mat-list-item [routerLink]="'/create-contact'"> Create Contact </a>-->
+<!--<a mat-list-item [routerLink]="'/activities'"> Activities </a>-->
+<!--<a mat-list-item [routerLink]="'/create-activity'"> Create Activity </a>-->
+<!--<a mat-list-item (click)="sidenav.toggle()" href="" mat-list-item>Close</a>-->
+
+<!--</mat-nav-list>-->
+<!--</mat-sidenav>-->
+<!--<mat-sidenav-content>-->
+<!--<div style="height: 88vh;">-->
+
+<!--<router-outlet></router-outlet>-->
+<!--</div>-->
+<!--</mat-sidenav-content>-->
+<!--</mat-sidenav-container>-->

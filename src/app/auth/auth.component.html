@@ -1,0 +1,60 @@
+<mat-card>
+    <form  #authForm="ngForm" (ngSubmit)="onSubmit(authForm)">
+    <mat-card-header>
+        <mat-card-title>Login</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+            <mat-form-field appearance="outline" >
+                <mat-label>Enter your email</mat-label>
+                <input
+                        matInput
+                        type="email"
+                        id="email"
+                        placeholder="please enter your email"
+                        name="email"
+                        ngModel
+                        required
+                        #email="ngModel"
+                >
+                <mat-error *ngIf="!email.valid && email.touched">
+                </mat-error>
+            </mat-form-field>
+
+            <mat-form-field appearance="outline" >
+                <mat-label>Enter your password</mat-label>
+                <input
+                        matInput
+                        [type]="hide ? 'password' : 'text'"
+                        id="password"
+                        placeholder="please enter your password"
+                        name="password"
+                        ngModel
+                        required
+                        #password="ngModel"
+                >
+                <button mat-icon-button matSuffix
+                        (click)="hide = !hide"
+                        [attr.aria-label]="'Hide password'"
+                        [attr.aria-pressed]="hide">
+                    <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+                </button>
+                <mat-error *ngIf="!password.valid && password.touched">
+                </mat-error>
+
+            </mat-form-field>
+
+    </mat-card-content>
+
+    <mat-card-actions>
+        <button
+                mat-button
+                [disabled]="authForm.invalid"
+                type="submit"
+        >LogIn
+        </button>
+
+    </mat-card-actions>
+    </form>
+
+</mat-card>
+

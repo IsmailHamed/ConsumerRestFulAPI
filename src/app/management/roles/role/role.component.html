@@ -1,0 +1,114 @@
+<mat-horizontal-stepper labelPosition="bottom"
+                        #stepper
+                        [linear]="true"
+                        (selectionChange)="selectionChange($event)">
+    <mat-step [stepControl]="roleFormGroup">
+        <form [formGroup]="roleFormGroup">
+            <ng-template matStepLabel>Fill out role</ng-template>
+            <mat-form-field>
+                <mat-label>Name</mat-label>
+                <input matInput placeholder="name" formControlName="name" required>
+                <mat-icon matSuffix>
+                    <mat-progress-spinner *ngIf="roleFormGroup.get('name').pending && !editMode"
+                                          diameter="20"
+                                          [color]="'accent'"
+                                          [mode]="'indeterminate'"
+                                          [value]="'50'">
+                    </mat-progress-spinner>
+                </mat-icon>
+            </mat-form-field>
+            <mat-form-field>
+                <mat-label>Display name</mat-label>
+                <input matInput placeholder="Display name" formControlName="displayName">
+            </mat-form-field>
+            <mat-form-field>
+                <mat-label>Description</mat-label>
+                <input matInput placeholder="Description" formControlName="description">
+            </mat-form-field>
+
+            <mat-error class="error-message"
+                       *ngIf="roleFormGroup.get('name').hasError('existingRoleName') &&
+                               (roleFormGroup.get('name').dirty ||
+                               roleFormGroup.get('name').touched)">
+                <!--{{validation.message}}-->
+                Test
+            </mat-error>
+            <div>
+                <button mat-button matStepperNext
+                        [disabled]="!roleFormGroup.valid"
+                >
+                    Next
+                </button>
+            </div>
+        </form>
+
+    </mat-step>
+    <mat-step [stepControl]="permissionsFormGroup" optional>
+        <form [formGroup]="permissionsFormGroup">
+            <ng-template matStepLabel>
+                Fill out permissions to role
+            </ng-template>
+            <!--<div formArrayName="permissions">-->
+            <!--<mat-checkbox-->
+            <!--*ngFor="let order of controlsPermissionsToRole; let i = index"-->
+            <!--[formControlName]="i">{{ordersData[i].name}}</mat-checkbox>-->
+            <!--</div>-->
+            <mat-selection-list formControlName="permissions">
+                <mat-list-option
+                        *ngFor="let permission of permissions?.permissions"
+                        [selected]="isSelectedPermission(permission.identifier)"
+                        [value]="permission.identifier">
+                    <mat-icon matListIcon>folder</mat-icon>
+                    <h3 matLine> {{permission.displayName}} </h3>
+                    <p matLine> {{permission.description}} </p>
+                    <!--<p matLine > {{message.content}} </p>-->
+                    <!--{{permission.name}}-->
+                </mat-list-option>
+            </mat-selection-list>
+            <app-paginator [pagination]="permissions?.pagination"
+                           [center]="false"
+                           (page)="fetchPermissions($event)"
+            ></app-paginator>
+            <div>
+                <button mat-button matStepperPrevious>Back</button>
+                <button mat-button matStepperNext (click)="fetchUsers()">Next</button>
+            </div>
+        </form>
+    </mat-step>
+    <mat-step [stepControl]="usersFormGroup" optional>
+        <form [formGroup]="usersFormGroup">
+            <mat-form-field>
+                <mat-label>Filter</mat-label>
+                <input matInput formControlName="userFilter" (keyup)="applyFilter($event)" placeholder="Ex. ium">
+            </mat-form-field>
+            <ng-template matStepLabel>Fill out users to role</ng-template>
+            <mat-selection-list formControlName="users">
+                <mat-list-option
+                        *ngFor="let user of users?.users"
+                        [selected]="isSelectedUsers(user.identifier)"
+                        [value]="user.identifier">
+                    <mat-icon matListIcon>perm_identity</mat-icon>
+                    <h3 matLine> {{user.name}} </h3>
+                </mat-list-option>
+            </mat-selection-list>
+            <app-paginator [pagination]="users?.pagination"
+                           [center]="false"
+                           (page)="fetchUsers($event)"
+            ></app-paginator>
+            <div>
+                <button mat-button matStepperPrevious>Back</button>
+                <button mat-button matStepperNext>Next</button>
+            </div>
+        </form>
+    </mat-step>
+    <mat-step>
+        <ng-template matStepLabel>Done</ng-template>
+        <p>You are now done.</p>
+        <div>
+            <button mat-button matStepperPrevious>Back</button>
+            <button mat-button matStepper (click)="matStepperFirst(stepper)">Reset</button>
+            <button mat-button (click)="saveChanges()">Save</button>
+        </div>
+    </mat-step>
+</mat-horizontal-stepper>
+

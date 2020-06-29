@@ -1,0 +1,40 @@
+<app-paginator [pagination]="pagination" (page)="fetchPage($event)"></app-paginator>
+<mat-grid-list cols="5" rowHeight="4:4">
+
+    <mat-grid-tile *ngFor="let category of categories ">
+        <mat-card class="example-card">
+            <mat-card-header>
+                <div mat-card-avatar class=" example-header-image"></div>
+                <mat-card-title>{{category.title }}</mat-card-title>
+            </mat-card-header>
+            <mat-card-content>
+
+                <p>
+                    {{category.details}}
+                </p>
+                <!--<mat-card-actions>-->
+                <!--<button mat-button>LIKE</button>-->
+                <!--<button mat-button>SHARE</button>-->
+                <!--<button-->
+                <!--mat-button-->
+                <!--[routerLink]="['/categories',category.identifier]">-->
+                <!--Detail-->
+                <!--</button>-->
+                <!--</mat-card-actions>-->
+            </mat-card-content>
+            <mat-card-footer>
+                <button
+                        mat-button
+                        [routerLink]="['/categories',category.identifier,'products']">
+                    Products
+                </button>
+                <button
+                        mat-button
+                        [routerLink]="['/categories',category.identifier]">
+                    Detail
+                </button>
+            </mat-card-footer>
+        </mat-card>
+    </mat-grid-tile>
+</mat-grid-list>
+

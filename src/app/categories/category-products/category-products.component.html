@@ -1,0 +1,8 @@
+<app-paginator [pagination]="pagination" (page)="fetchPage($event)"></app-paginator>
+<mat-grid-list cols="4" rowHeight="1:1">
+
+    <mat-grid-tile *ngFor="let product of products">
+        <app-product-item [product]="product"></app-product-item>
+    </mat-grid-tile>
+
+</mat-grid-list>

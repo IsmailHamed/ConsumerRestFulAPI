@@ -1,0 +1,19 @@
+<mat-card>
+    <mat-card-title>
+        {{category.title}}
+    </mat-card-title>
+    <mat-card-content>
+        <mat-label>Details : {{category.details}}</mat-label>
+        <br>
+        <mat-label>CreationDate : {{category.creationDate}}</mat-label>
+        <br>
+        <mat-label>LastChange : {{category.lastChange}}</mat-label>
+        <br>
+        <mat-label>DeleteDate : {{category.deleteDate}}</mat-label>
+
+    </mat-card-content>
+    <mat-card-actions>
+        <button mat-button color="primary" (click)="onEdit()">Edit</button>
+        <button mat-button color="warn" (click)="onDelete()">Delete</button>
+    </mat-card-actions>
+</mat-card>
